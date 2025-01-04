@@ -1,0 +1,7 @@
+numpy
+pandas
+joblib
+spacy
+transformers
+scipy
+torch

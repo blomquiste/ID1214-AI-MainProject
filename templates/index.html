@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Sentiment Analyzer</title>
+</head>
+<body>
+    <div class="main-container">
+        <h1>Sentiment Analyzer</h1>
+        <div class="form-container">
+            <form method="POST">
+                <textarea name="text" rows="4" cols="50"></textarea><br><br>
+                <button type="submit">Analyze</button>
+            </form>
+            
+        </div>
+        <div class="=result-container">
+            <div>
+                {% if text %}
+                {{text}}
+                {% endif %}
+            </div>
+            <div class="nltk-model">
+                {% if result %}
+                <h3>NLTK Model</h3>
+                <h2>{{ result }}</h2>
+                {% endif %}
+            </div>
+            <div class="roberta-model">
+                {% if roberta_result %}
+                <h3>RoBERTa Model</h3>
+                <p>Negative: {{ roberta_result['negative'] }}</p>
+                <p>Neutral: {{ roberta_result['neutral'] }}</p>
+                <p>Positive: {{ roberta_result['positive'] }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

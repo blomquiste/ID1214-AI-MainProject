@@ -1,0 +1,38 @@
+html{
+    font-family: Arial, sans-serif;
+    background-color: #775253;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+body{
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+.main-container{
+    margin: 10px;
+}
+h1{
+   width: 100%;
+}
+textarea{
+    border: #351431;
+}
+button {
+    padding: 10px 20px;
+    background-color: #351431;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.result-container{
+    display: flex;
+}

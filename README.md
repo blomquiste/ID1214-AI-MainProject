@@ -19,7 +19,10 @@ For Windows:
 
 ``` pip install flask ```
 
-5. Run the Flask app:
+5. Install dependencies
+```pip install -r requirements.txt```
+
+6. Run the Flask app:
 
 ``` python app.py ```
 

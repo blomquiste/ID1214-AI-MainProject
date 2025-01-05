@@ -30,8 +30,8 @@ def analyze_irony(text):
 
     # Return the scores for irony and not irony
     irony_results = {
-        "not_irony": float(scores[0]),
-        "irony": float(scores[1])
+        "not_irony": round(float(scores[0]) * 100, 2),  # Convert to percentage
+        "irony": round(float(scores[1]) * 100, 2)  # Convert to percentage
     }
     return irony_results
 
@@ -45,9 +45,9 @@ def analyze_sentiment(text):
 
     # Return the scores for negative, neutral, and positive sentiment
     sentiments = {
-        'negative': float(scores[0]),
-        'neutral': float(scores[1]),
-        'positive': float(scores[2])
+        'Negative': float(scores[0]),
+        'Neutral': float(scores[1]),
+        'Positive': float(scores[2])
     }
     dominant_sentiment = max(sentiments, key=sentiments.get)
     confidence = sentiments[dominant_sentiment] * 100  # Confidence percentage
@@ -67,7 +67,7 @@ def combined_analysis(text):
     sentiments = analyze_sentiment(text)
     
     # If the result is not irony, we proceed to get the sentiment
-    if irony_results["irony"] < 0.6:
+    if irony_results["irony"] < 60:
         # Perform and return only sentiment analysis
         return {
             "analysis_type": "sentiment",

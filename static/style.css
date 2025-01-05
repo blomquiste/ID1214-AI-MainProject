@@ -45,4 +45,21 @@ hr{
 }
 .result-container{
     display: flex;
+    margin-top: 30px;
+    color: black;
+}
+.model-container {
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    /* background-color: #fafafa; */
+}
+
+.svm-model {
+    border-left: 5px solid #4CAF50;
+}
+
+.roberta-model {
+    border-left: 5px solid #2196F3;
 }

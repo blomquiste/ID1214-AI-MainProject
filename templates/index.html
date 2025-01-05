@@ -7,8 +7,14 @@
 <body>
     <div class="main-container">
         <h1>Sentiment Analyzer</h1>
+        <div class="description">
+            <p>Welcome to the Sentiment Analyzer! </p>
+            <p>This tool allows you to analyze the sentiment of any text input whether it's determining the overall emotion or detecting sarcasm.</p>   
+            <p>Our app uses two models, SVM and RoBERTa to provide a side-by-side comparison into their insights. </p>
+            <p>Simply input your text and see the results from the two models displayed with sentiment and confidence level.</p>     
+        </div>
         <div class="form-container">
-            <p>Type some text</p>
+            <p>What would you like to analyze?</p>
             <form method="POST">
                 <textarea name="text" rows="4" cols="70"></textarea><br><br>
                 <button type="submit">Analyze</button>
@@ -18,21 +24,21 @@
         <div class="=result-container">
             <div class="input">
                 {% if text %}
-                <p>{{text}}</p>
+                <p><strong>Input Text:</strong> {{text}}</p>
                 {% endif %}
             </div>
-            <!-- <div class="nltk-model">
-                {% if result %}
-                <h3>NLTK Model</h3>
-                <h2>{{ result }}</h2>
+            {% if svm_result %}
+            <div class="model-container svm-model">
+                <h3>SVM Model Results:</h3>
+                <p>Sentiment: {{ svm_result }}</p>
                 {% endif %}
-            </div> -->
-            <div class="roberta-model">
-                {% if roberta_result %}
+            </div>
+            {% if roberta_result %}
+            <div class="model-container roberta-model">
                 <h3>RoBERTa Model Results: </h3>
                 {% if roberta_result['analysis_type']=='irony' %}
                 <p>This text seems to be sarcastic..</p>
-                <p>Irony Score: {{ (roberta_result['irony_analysis']['irony'])*100 }}</p>
+                <p>Irony Score: {{ (roberta_result['irony_analysis']['irony']) }}</p>
                 {% elif roberta_result['analysis_type'] == 'sentiment' %}
                 <p>Sentiment: {{ roberta_result['sentiment_analysis']['dominant_sentiment']}}, {{roberta_result['sentiment_analysis']['confidence']}}%</p>
                 <!-- <p>Negative: {{ roberta_result['sentiment_analysis']['negative'] }}</p>

@@ -29,15 +29,16 @@
             </div> -->
             <div class="roberta-model">
                 {% if roberta_result %}
-                <h3>RoBERTa Model</h3>
-                <p>Negative: {{ roberta_result['sentiments']['negative'] }}</p>
-                <p>Neutral: {{ roberta_result['sentiments']['neutral'] }}</p>
-                <p>Positive: {{ roberta_result['sentiments']['positive'] }}</p>
-
-                <!-- Display the dominant sentiment and confidence -->
-                <h4>Analysis Summary:</h4>
-                <p>Dominant Sentiment: {{ roberta_result['dominant_sentiment'] }}</p>
-                <p>Confidence: {{ roberta_result['confidence'] }}%</p>
+                <h3>RoBERTa Model Results: </h3>
+                {% if roberta_result['analysis_type']=='irony' %}
+                <p>This text seems to be sarcastic..</p>
+                <p>Irony Score: {{ (roberta_result['irony_analysis']['irony'])*100 }}</p>
+                {% elif roberta_result['analysis_type'] == 'sentiment' %}
+                <p>Sentiment: {{ roberta_result['sentiment_analysis']['dominant_sentiment']}}, {{roberta_result['sentiment_analysis']['confidence']}}%</p>
+                <!-- <p>Negative: {{ roberta_result['sentiment_analysis']['negative'] }}</p>
+                <p>Neutral: {{ roberta_result['sentiment_analysis']['neutral'] }}</p>
+                <p>Positive: {{ roberta_result['sentiment_analysis']['positive'] }}</p> -->
+                {% endif %}
                 {% endif %}
             </div>
         </div>

@@ -21,11 +21,20 @@ def analyze_sentiment_roberta(text):
     scores = softmax(scores)
     
     # Return the scores for negative, neutral, and positive sentiment
-    return {
+    sentiments = {
         'negative': float(scores[0]),
         'neutral': float(scores[1]),
         'positive': float(scores[2])
     }
+    dominant_sentiment = max(sentiments, key=sentiments.get)
+    confidence = sentiments[dominant_sentiment] * 100  # Confidence percentage
+    analysis = {
+        'dominant_sentiment': dominant_sentiment,
+        'confidence': round(confidence, 2),
+        'sentiments': sentiments
+    }
+    
+    return analysis
 
 
 #--------Testing----------

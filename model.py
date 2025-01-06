@@ -11,7 +11,6 @@ y_train = joblib.load('pickles/y_train.pkl')
 y_test = joblib.load('pickles/y_test.pkl')
 
 model = SVC()
-
 results = []
 
 print(f"\nTraining and evaluating {model}")
@@ -32,7 +31,6 @@ try:
     plt.title(f'Confusion Matrix for SVM')
     plt.show()
 
-
     results.append({
         'Model': model,
         'Accuracy': acc * 100,
@@ -44,5 +42,4 @@ except Exception as e:
     print(f"Error training {model} model: {e}")
 
 results_df = pd.DataFrame(results)
-
-print("\n",results_df)
+print(results_df)

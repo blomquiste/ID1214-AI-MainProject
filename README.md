@@ -23,6 +23,10 @@ For Windows:
 
 ```pip install -r requirements.txt```
 
+6. Download NLP:
+
+```python -m spacy download en_core_web_sm```
+
 7. Run the Flask app:
 
 ``` python app.py ```

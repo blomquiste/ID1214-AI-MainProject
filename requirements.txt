@@ -1,7 +1,9 @@
-numpy
+numpy<2
 pandas
 joblib
 spacy
 transformers
 scipy
 torch
+emoji
+scikit-learn

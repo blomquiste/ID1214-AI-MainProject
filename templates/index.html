@@ -1,24 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>Sentiment Analyzer</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block body %}
     <div class="main-container">
-        <h1>Sentiment Analyzer</h1>
         <div class="description">
-            <p>Welcome to the Sentiment Analyzer! </p>
+            <h2>Welcome to the Sentiment Analyzer! </h2>
             <p>This tool allows you to analyze the sentiment of any text input whether it's determining the overall emotion or detecting sarcasm.</p>   
-            <p>Our app uses two models, SVM and RoBERTa to provide a side-by-side comparison into their insights. </p>
-            <p>Simply input your text and see the results from the two models displayed with sentiment and confidence level.</p>     
+            <p>Our app uses two models, a Support Vector Machine model (SVM) and a RoBERTa language model to provide a side-by-side comparison into their insights. The SVM outputs a definite sentiment while RoBERTa offers a more nuanced perspective by calculating confidence scores across the sentiment categories.</p>
+            <p>Simply input your text and see the results from the two models displayed side-by-side.</p>     
         </div>
         <div class="form-container">
-            <p>What would you like to analyze?</p>
             <form method="POST">
-                <textarea name="text" rows="4" cols="70"></textarea><br><br>
+                <textarea name="text" placeholder="What would you like to analyze?"></textarea><br><br>
                 <button type="submit">Analyze</button>
-            </form>  
+            </form>
         </div>
         <hr>
         <div class="=result-container">
@@ -27,27 +20,53 @@
                 <p><strong>Input Text:</strong> {{text}}</p>
                 {% endif %}
             </div>
-            {% if svm_result %}
-            <div class="model-container svm-model">
-                <h3>SVM Model Results:</h3>
-                <p>Sentiment: {{ svm_result }}</p>
+            <div class="models-wrapper">
+                {% if svm_result %}
+                <div class="model-container svm-model">
+                    <h3>SVM Model Results:</h3>
+                    <p>Sentiment: {{ svm_result }}</p>
                 {% endif %}
-            </div>
-            {% if roberta_result %}
-            <div class="model-container roberta-model">
-                <h3>RoBERTa Model Results: </h3>
-                {% if roberta_result['analysis_type']=='irony' %}
-                <p>This text seems to be sarcastic..</p>
-                <p>Irony Score: {{ (roberta_result['irony_analysis']['irony']) }}</p>
-                {% elif roberta_result['analysis_type'] == 'sentiment' %}
-                <p>Sentiment: {{ roberta_result['sentiment_analysis']['dominant_sentiment']}}, {{roberta_result['sentiment_analysis']['confidence']}}%</p>
-                <!-- <p>Negative: {{ roberta_result['sentiment_analysis']['negative'] }}</p>
-                <p>Neutral: {{ roberta_result['sentiment_analysis']['neutral'] }}</p>
-                <p>Positive: {{ roberta_result['sentiment_analysis']['positive'] }}</p> -->
-                {% endif %}
+                </div>
+                {% if is_rob %}
+                <div class="model-container roberta-model">
+                    <h3>RoBERTa Model Results: </h3>
+                    <canvas id="pieChart" height="230"></canvas>
+                    <script>
+                        var robertaData = JSON.parse('{{ roberta_result | safe }}');
+                        console.log(robertaData)
+                        var ctx = document.getElementById("pieChart")
+                        if (robertaData.sentiment_analysis) {
+                            var sentimentScores = robertaData.sentiment_analysis;
+                            if(robertaData.analysis_type == 'irony'){
+                                var ironyScores = robertaData.irony_analysis
+                                var labels = Object.keys(ironyScores);
+                                var values = Object.values(ironyScores);
+                            }else{
+                                var labels = Object.keys(sentimentScores);
+                                var values = Object.values(sentimentScores);
+                            }
+                            new Chart(ctx, {
+                                type: 'pie',
+                                data: {
+                                    labels:labels,
+                                    datasets: [{
+                                        data: values,
+                                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'], // Example colors
+                                    }]
+                                },
+                                options: {
+                                    responsive: false,
+                                    plugins: {
+                                        legend: {
+                                            onClick: null, //Disable interactivity
+                                        }
+                                }}
+                            });
+                        }else {console.error("No sentiment data found in RoBERTa results.");}
+                    </script>
+                </div>
                 {% endif %}
             </div>
         </div>
     </div>
-</body>
-</html>
+{% endblock %}

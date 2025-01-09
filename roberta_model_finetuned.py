@@ -52,12 +52,12 @@ def analyze_sentiment(text):
     dominant_sentiment = max(sentiments, key=sentiments.get)
     confidence = sentiments[dominant_sentiment] * 100  # Confidence percentage
 
-    sentiment_results = {
-        'dominant_sentiment': dominant_sentiment,
-        'confidence': round(confidence, 2),
-        'sentiments': sentiments
-    }
-    return sentiment_results
+    # sentiment_results = {
+    #     'dominant_sentiment': dominant_sentiment,
+    #     'confidence': round(confidence, 2),
+    #     'sentiments': sentiments
+    # }
+    return sentiments
 
 
 def combined_analysis(text):

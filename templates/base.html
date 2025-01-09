@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UFT-8">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <title>Sentiment Analyzer</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>
+    <body>
+        <div class="header">
+            <hr class="line">
+            <img class="logo" src="static/flower-64.png">
+            <hr class="line">
+        </div>
+        {% block body %}{% endblock %}
+    </body>
+</html>

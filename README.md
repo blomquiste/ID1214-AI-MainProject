@@ -7,15 +7,21 @@
 
 2. Navigate to the folder ID1214-AI-MainProject.
 
-3. Create a virtual environment:
+3. Create and access a virtual environment:
 
 For Linux/macOS:
-``` python3 -m venv venv source venv/bin/activate ```
+
+```python3 -m venv .venv```
+``` source venv/bin/activate ```
 
 For Windows:
-``` python -m venv venv .\venv\Scripts\activate ```
 
-4. Install Flask inside the virtual environment:
+```py -m venv .venv```
+``` .\venv\Scripts\activate ```
+
+If you were successful, this is indicated by the (venv) prefix to the path in the terminal. Check for this.
+
+5. Install Flask inside the virtual environment:
 
 ``` pip install flask ```
 

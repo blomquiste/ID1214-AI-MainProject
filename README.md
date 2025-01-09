@@ -12,11 +12,13 @@
 For Linux/macOS:
 
 ```python3 -m venv .venv```
+
 ``` source venv/bin/activate ```
 
 For Windows:
 
 ```py -m venv .venv```
+
 ``` .\venv\Scripts\activate ```
 
 If you were successful, this is indicated by the (venv) prefix to the path in the terminal. Check for this.

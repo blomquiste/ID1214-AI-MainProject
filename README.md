@@ -31,9 +31,13 @@ If you were successful, this is indicated by the (venv) prefix to the path in th
 
 ```pip install -r requirements.txt```
 
+6. Download NLP:
+
+```python -m spacy download en_core_web_sm```
+
 7. Run the Flask app:
 
-``` python app.py ```
+``` python app.py ``` or ```flask run```
 
 
 
